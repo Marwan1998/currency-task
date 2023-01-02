@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateCurrenciesRequest;
 use App\Repositories\CurrenciesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Laracasts\Flash\Flash;
+use App\Models\Currencies;
 use Response;
 
 class CurrenciesController extends AppBaseController
@@ -29,10 +31,16 @@ class CurrenciesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $currencies = $this->currenciesRepository->all();
+        // $currencies = $this->currenciesRepository->all(); //to-Remove
+        $currencies = $this->currenciesRepository->getLatest();
 
-        return view('currencies.index')
-            ->with('currencies', $currencies);
+        return [
+            'WithValues' => $currencies,
+            // 'WithValues' => Currencies::find(1)->getValues()->where('id', '=', '2')->first(),
+            // 'WithValues' => Currencies::find(1)->getValues()->orderBy('created_at', 'desc')->first(),
+        ];
+
+        return view('currencies.index')->with('currencies', $currencies);
     }
 
     /**
@@ -58,9 +66,10 @@ class CurrenciesController extends AppBaseController
         if ($request->hasFile('pic')) {
             $image = $request->file('pic');
             $imageName = $image->getClientOriginalName();
-            $request->file('pic')->storeAs('flags', $imageName);
+            $request->file('pic')->storeAs('public/flags/', $imageName);
         }
         $input['pic'] = $imageName;
+        // $url = Storage::url($imageName); // if i want to save the url
 
         $currencies = $this->currenciesRepository->create($input);
 

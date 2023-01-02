@@ -51,5 +51,18 @@ class Currencies extends Model
         'name' => 'required'
     ];
 
+    public function getValues()
+    {
+        // return $this->hasMany(currencies_info::class, 'currency_id', 'id');
+        return $this->hasOne(currencies_info::class, 'currency_id', 'id')->latest('created_at');
+    }
+
+    public function currencies()
+    {
+        return $this->hasOne(currencies_info::class, 'currency_id', 'id')->latest('created_at');
+        //will get the last inserted value.
+    }
+
+
     
 }

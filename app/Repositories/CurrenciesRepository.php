@@ -21,6 +21,12 @@ class CurrenciesRepository extends BaseRepository
         'pic'
     ];
 
+    // get all with last value.
+    public function getLatest()
+    {
+        return Currencies::with('currencies')->get();
+    }
+
     /**
      * Return searchable fields
      *

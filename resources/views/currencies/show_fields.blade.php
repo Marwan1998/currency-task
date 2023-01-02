@@ -8,8 +8,6 @@
 <div class="col-sm-12">
     {!! Form::label('pic', 'Pic:') !!}
     <p>{{ $currencies->pic }}</p>
-    <p>{{ $currencies->pic }}</p>
-    <p>{{ $currencies->pic }}</p>
 </div>
 
 <!-- Created At Field -->
