@@ -2,8 +2,8 @@
     {
         "name": "id",
         "dbType": "id",
-        "htmlType": null,
-        "validations": null,
+        "htmlType": "",
+        "validations": "",
         "searchable": false,
         "fillable": false,
         "primary": true,
@@ -38,8 +38,8 @@
     {
         "name": "created_at",
         "dbType": "timestamp",
-        "htmlType": null,
-        "validations": null,
+        "htmlType": "",
+        "validations": "",
         "searchable": false,
         "fillable": false,
         "primary": false,
@@ -50,13 +50,17 @@
     {
         "name": "updated_at",
         "dbType": "timestamp",
-        "htmlType": null,
-        "validations": null,
+        "htmlType": "",
+        "validations": "",
         "searchable": false,
         "fillable": false,
         "primary": false,
         "inForm": false,
         "inIndex": false,
         "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "1t1,Currencies,currency_id,id"
     }
 ]

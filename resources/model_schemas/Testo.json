@@ -2,8 +2,8 @@
     {
         "name": "id",
         "dbType": "id",
-        "htmlType": "",
-        "validations": "",
+        "htmlType": null,
+        "validations": null,
         "searchable": false,
         "fillable": false,
         "primary": true,
@@ -13,9 +13,9 @@
     },
     {
         "name": "name",
-        "dbType": "string,7",
+        "dbType": "string",
         "htmlType": "text",
-        "validations": "required",
+        "validations": "pic string image",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -26,7 +26,7 @@
     {
         "name": "pic",
         "dbType": "string",
-        "htmlType": "file",
+        "htmlType": "image",
         "validations": "",
         "searchable": true,
         "fillable": true,
@@ -38,8 +38,8 @@
     {
         "name": "created_at",
         "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
+        "htmlType": null,
+        "validations": null,
         "searchable": false,
         "fillable": false,
         "primary": false,
@@ -50,8 +50,8 @@
     {
         "name": "updated_at",
         "dbType": "timestamp",
-        "htmlType": "",
-        "validations": "",
+        "htmlType": null,
+        "validations": null,
         "searchable": false,
         "fillable": false,
         "primary": false,
