@@ -77,15 +77,10 @@ class CurrenciesController extends AppBaseController
         }
         // $url = Storage::url($imageName); // if i want to save the url
 
-        // Debug::
-        // return [
-        //     'req' => $input,
-        // ];
-
         $currencies = $this->currenciesRepository->create($input); // save new currency to currency table
         
         $input['currency_id'] = $currencies->id;
-        
+
         $this->currenciesInfoRepository->create($input);
 
         Flash::success('Currencies saved successfully.');
@@ -156,8 +151,11 @@ class CurrenciesController extends AppBaseController
             return redirect(route('currencies.index'));
         }
 
-        $currencies = $this->currenciesRepository->update($request->all(), $id);
-        // TODO:: insert into '$this->currenciesInfoRepository->create($request);
+        $input = $request->all();
+        // $currencies =
+        $this->currenciesRepository->update($input, $id);
+        $input['currency_id'] = $id;
+        $this->currenciesInfoRepository->create($input);
 
         Flash::success('Currencies updated successfully.');
 
