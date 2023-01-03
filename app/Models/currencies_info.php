@@ -49,7 +49,8 @@ class currencies_info extends Model
      * @var array
      */
     public static $rules = [
-        
+        'value' => 'required',
+        // 'currency_id' => 'required'
     ];
 
     /**

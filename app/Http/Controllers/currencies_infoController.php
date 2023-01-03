@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Createcurrencies_infoRequest;
 use App\Http\Requests\Updatecurrencies_infoRequest;
 use App\Repositories\currencies_infoRepository;
+use App\Repositories\CurrenciesRepository;
 use App\Http\Controllers\AppBaseController;
+use App\Models\currencies_info;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 use Response;
@@ -14,10 +16,12 @@ class currencies_infoController extends AppBaseController
 {
     /** @var currencies_infoRepository $currenciesInfoRepository*/
     private $currenciesInfoRepository;
+    private $currenciesRepository;
 
-    public function __construct(currencies_infoRepository $currenciesInfoRepo)
+    public function __construct(currencies_infoRepository $currenciesInfoRepo, CurrenciesRepository $currenciesRepository)
     {
         $this->currenciesInfoRepository = $currenciesInfoRepo;
+        $this->currenciesRepository = $currenciesRepository;
     }
 
     /**
@@ -42,7 +46,8 @@ class currencies_infoController extends AppBaseController
      */
     public function create()
     {
-        return view('currencies_infos.create');
+        $currencies = $this->currenciesRepository->getLatest();
+        return view('currencies_infos.create')->with('currencies', $currencies);
     }
 
     /**

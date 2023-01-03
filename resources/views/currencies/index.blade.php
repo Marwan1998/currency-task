@@ -5,14 +5,19 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Currencies</h1>
+                    <h1 class="text-secondary">Currencies</h1>
                 </div>
                 <div class="col-sm-6">
-                    <a class="btn btn-primary float-right"
+                    <a class="btn btn-primary float-right ml-1"
                        href="{{ route('currencies.create') }}">
                         Add New
                     </a>
+                    <a class="btn btn-primary float-right mr-1"
+                        href="{{ route('currenciesInfos.create') }}">
+                        Add Update
+                    </a>
                 </div>
+
             </div>
         </div>
     </section>
