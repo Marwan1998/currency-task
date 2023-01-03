@@ -46,8 +46,11 @@ class currencies_infoController extends AppBaseController
      */
     public function create()
     {
-        $currencies = $this->currenciesRepository->getLatest();
-        return view('currencies_infos.create')->with('currencies', $currencies);
+        // $currencies = $this->currenciesRepository->getLatest();
+        $currency = $this->currenciesRepository->all()->pluck('name', 'id');
+
+        return view('currencies_infos.create')
+        ->with('currency', $currency);
     }
 
     /**

@@ -39,3 +39,11 @@ Route::resource('currenciesInfos', App\Http\Controllers\currencies_infoControlle
 
 
 Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
+
+
+
+
+
+
+
+
