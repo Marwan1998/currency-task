@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCurrenciesRequest;
 use App\Http\Requests\UpdateCurrenciesRequest;
 use App\Repositories\CurrenciesRepository;
+use App\Repositories\currencies_infoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,10 +17,12 @@ class CurrenciesController extends AppBaseController
 {
     /** @var CurrenciesRepository $currenciesRepository*/
     private $currenciesRepository;
+    private $currenciesInfoRepository;
 
-    public function __construct(CurrenciesRepository $currenciesRepo)
+    public function __construct(CurrenciesRepository $currenciesRepo, currencies_infoRepository $currenciesInfoRepository)
     {
         $this->currenciesRepository = $currenciesRepo;
+        $this->currenciesInfoRepository = $currenciesInfoRepository;
     }
 
     /**
@@ -34,11 +37,12 @@ class CurrenciesController extends AppBaseController
         // $currencies = $this->currenciesRepository->all(); //to-Remove
         $currencies = $this->currenciesRepository->getLatest();
 
-        return [
-            'WithValues' => $currencies,
-            // 'WithValues' => Currencies::find(1)->getValues()->where('id', '=', '2')->first(),
-            // 'WithValues' => Currencies::find(1)->getValues()->orderBy('created_at', 'desc')->first(),
-        ];
+        // Debug
+        // return [
+        //     'WithValues' => $currencies,
+        //     // 'WithValues' => Currencies::find(1)->getValues()->where('id', '=', '2')->first(),
+        //     // 'WithValues' => Currencies::find(1)->getValues()->orderBy('created_at', 'desc')->first(),
+        // ];
 
         return view('currencies.index')->with('currencies', $currencies);
     }
@@ -67,11 +71,22 @@ class CurrenciesController extends AppBaseController
             $image = $request->file('pic');
             $imageName = $image->getClientOriginalName();
             $request->file('pic')->storeAs('public/flags/', $imageName);
+            $input['pic'] = $imageName;
+        } else {
+            $input['pic'] = 'none.png';
         }
-        $input['pic'] = $imageName;
         // $url = Storage::url($imageName); // if i want to save the url
 
-        $currencies = $this->currenciesRepository->create($input);
+        // Debug::
+        // return [
+        //     'req' => $input,
+        // ];
+
+        $currencies = $this->currenciesRepository->create($input); // save new currency to currency table
+        
+        $input['currency_id'] = $currencies->id;
+        
+        $this->currenciesInfoRepository->create($input);
 
         Flash::success('Currencies saved successfully.');
 
@@ -115,7 +130,19 @@ class CurrenciesController extends AppBaseController
             return redirect(route('currencies.index'));
         }
 
-        return view('currencies.edit')->with('currencies', $currencies);
+        $value = $this->currenciesInfoRepository->find($id, ['value', 'currency_id']);
+        $value = $this->currenciesInfoRepository->findValue($id);
+
+        // Debug::
+        // return [
+        //     'success' => 'true',
+        //     'id' => $id,
+        //     'value' => $value,
+        // ];
+
+        return view('currencies.edit')
+        ->with('currencies', $currencies)
+        ->with('values', $value);
     }
 
     /**

@@ -7,7 +7,7 @@ use App\Http\Requests\Updatecurrencies_infoRequest;
 use App\Repositories\currencies_infoRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Flash;
+use Laracasts\Flash\Flash;
 use Response;
 
 class currencies_infoController extends AppBaseController

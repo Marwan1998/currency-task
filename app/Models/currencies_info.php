@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -57,6 +57,7 @@ class currencies_info extends Model
      **/
     public function currencies()
     {
-        return $this->hasOne(\App\Models\Currencies::class, 'currency_id', 'id');
+        return $this->belongsTo(\App\Models\Currencies::class, 'currency_id', 'id');
     }
+    
 }

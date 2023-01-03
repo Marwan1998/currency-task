@@ -11,9 +11,8 @@
         <tbody>
         @foreach($currencies as $currencies)
             <tr>
-                {{-- <td>{{ $currencies->name }}</td> --}}
-                <td>{{ $values->value }}</td>
-                <td>Value</td>
+                <td>{{ $currencies->name }}</td>
+                <td>{{ $currencies->currencies->value }}</td>
                 <td class="w-25">
                     <img class="img-fluid img-thumbnail rounded w-25" src="/storage/flags/{{ $currencies->pic }}" alt="{{ $currencies->pic }}">
                 </td>

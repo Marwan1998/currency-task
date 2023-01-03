@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Eloquent as Model;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -48,7 +48,8 @@ class Currencies extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required'
+        'name' => 'required',
+        'value' => 'required'
     ];
 
     public function getValues()
@@ -63,6 +64,16 @@ class Currencies extends Model
         //will get the last inserted value.
     }
 
+    //mutator method, to save all currencies names as upper case.
+    public function setNameAttribute($name)
+    {
+        $this->attributes['name'] = strtoupper($name);
+    }
 
-    
+    //accssor method, to retrive all currencies names as upper case.
+    public function getNameAttribute($name)
+    {
+        return strtoupper($name);
+    }
+
 }
