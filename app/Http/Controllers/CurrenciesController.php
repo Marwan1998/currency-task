@@ -130,19 +130,12 @@ class CurrenciesController extends AppBaseController
             return redirect(route('currencies.index'));
         }
 
-        $value = $this->currenciesInfoRepository->find($id, ['value', 'currency_id']);
+        // $value = $this->currenciesInfoRepository->find($id, ['value', 'currency_id']);
         $value = $this->currenciesInfoRepository->findValue($id);
-
-        // Debug::
-        // return [
-        //     'success' => 'true',
-        //     'id' => $id,
-        //     'value' => $value,
-        // ];
 
         return view('currencies.edit')
         ->with('currencies', $currencies)
-        ->with('values', $value);
+        ->with('values', $value); //TODO:: check this useless send.
     }
 
     /**
@@ -164,6 +157,7 @@ class CurrenciesController extends AppBaseController
         }
 
         $currencies = $this->currenciesRepository->update($request->all(), $id);
+        // TODO:: insert into '$this->currenciesInfoRepository->create($request);
 
         Flash::success('Currencies updated successfully.');
 

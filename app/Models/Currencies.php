@@ -48,7 +48,7 @@ class Currencies extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required',
+        'name' => 'required|min:3|max:3',
         'value' => 'required'
     ];
 
