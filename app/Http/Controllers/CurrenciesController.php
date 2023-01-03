@@ -104,6 +104,10 @@ class CurrenciesController extends AppBaseController
 
             return redirect(route('currencies.index'));
         }
+        
+        $value = $this->currenciesInfoRepository->findValue($id);
+
+        $currencies['value'] = $value? $value->value : 'none';
 
         return view('currencies.show')->with('currencies', $currencies);
     }

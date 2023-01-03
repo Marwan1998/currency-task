@@ -10,6 +10,11 @@
     <p>{{ $currencies->pic }}</p>
 </div>
 
+<div class="col-sm-12">
+    {!! Form::label('value', 'value:') !!}
+    <p>{{ $currencies->value }}</p>
+</div>
+
 <!-- Created At Field -->
 <div class="col-sm-12">
     {!! Form::label('created_at', 'Created At:') !!}
