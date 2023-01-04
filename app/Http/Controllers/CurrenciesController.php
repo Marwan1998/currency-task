@@ -120,11 +120,9 @@ class CurrenciesController extends AppBaseController
 
         if (empty($currencies)) {
             Flash::error('Currencies not found');
-
             return redirect(route('currencies.index'));
         }
 
-        // $value = $this->currenciesInfoRepository->find($id, ['value', 'currency_id']);
         $value = $this->currenciesInfoRepository->findValue($id);
 
         return view('currencies.edit')
@@ -156,9 +154,10 @@ class CurrenciesController extends AppBaseController
             $imageName = $image->getClientOriginalName();
             $request->file('pic')->storeAs('public/flags/', $imageName);
             $input['pic'] = $imageName;
-        } else {
-            $input['pic'] = 'none.png';
         }
+        // else {
+        //     $input['pic'] = 'none.png';
+        // }
 
         // $currencies =
         $this->currenciesRepository->update($input, $id);

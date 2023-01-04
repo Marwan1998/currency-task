@@ -7,7 +7,6 @@ use App\Http\Requests\Updatecurrencies_infoRequest;
 use App\Repositories\currencies_infoRepository;
 use App\Repositories\CurrenciesRepository;
 use App\Http\Controllers\AppBaseController;
-use App\Models\currencies_info;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 use Response;
@@ -46,7 +45,6 @@ class currencies_infoController extends AppBaseController
      */
     public function create()
     {
-        // $currencies = $this->currenciesRepository->getLatest();
         $currency = $this->currenciesRepository->all()->pluck('name', 'id');
 
         return view('currencies_infos.create')
