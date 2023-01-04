@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right ml-1"
                        href="{{ route('currencies.create') }}">
-                        Add New
+                        Add Currency
                     </a>
                     <a class="btn btn-primary float-right mr-1"
                         href="{{ route('currenciesInfos.create') }}">

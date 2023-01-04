@@ -68,7 +68,7 @@ class currencies_infoController extends AppBaseController
 
         Flash::success('Currencies Info saved successfully.');
 
-        return redirect(route('currenciesInfos.index'));
+        return redirect(route('currencies.index'));
     }
 
     /**
