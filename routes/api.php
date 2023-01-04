@@ -26,6 +26,8 @@ Route::resource('currencies', CurrenciesAPIController::class);
 
 // Route::resource('currency', TestController::class);
 
-Route::get('convert', [ConversionAPIController::class, 'index']);
+Route::get('convert', [CurrenciesAPIController::class, 'index']);
 
-Route::get('convert/{value}/{name}', [ConversionAPIController::class, 'convert']);
+Route::get('convert/{value}/{name}', [ConversionAPIController::class, 'convertCurruncy']);
+
+Route::get('convert/{value}', [ConversionAPIController::class, 'convert']);
