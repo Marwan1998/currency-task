@@ -108,6 +108,7 @@ class CurrenciesAPIController extends AppBaseController
     /**
      * Update the specified Currencies in storage.
      * PUT/PATCH /currencies/{id}
+     * required [name, value] optional [pic]
      *
      * @param int $id
      * @param UpdateCurrenciesAPIRequest $request
@@ -135,8 +136,9 @@ class CurrenciesAPIController extends AppBaseController
 
         $input['currency_id'] = $id;
 
-        $this->currenciesInfoRepository->create($input);
-        
+        $currencyInfo = $this->currenciesInfoRepository->create($input);
+        $currencies['value'] = $currencyInfo? $currencyInfo->value : 'none';
+
         return $this->sendResponse($currencies->toArray(), 'Currencies updated successfully');
     }
 
@@ -152,7 +154,6 @@ class CurrenciesAPIController extends AppBaseController
      */
     public function destroy($id)
     {
-        /** @var Currencies $currencies */
         $currencies = $this->currenciesRepository->find($id);
 
         if (empty($currencies)) {
@@ -161,6 +162,6 @@ class CurrenciesAPIController extends AppBaseController
 
         $currencies->delete();
 
-        return $this->sendSuccess('Currencies deleted successfully');
+        return $this->sendSuccess('A currency deleted successfully');
     }
 }
