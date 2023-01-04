@@ -5,9 +5,10 @@
 </div>
 
 <!-- Pic Field -->
-<div class="col-sm-12">
+<div class="col-sm-12 pb-3">
     {!! Form::label('pic', 'Pic:') !!}
-    <p>{{ $currencies->pic }}</p>
+    <p></p>
+    <img class="img-fluid img-thumbnail rounded w-25" src="/storage/flags/{{ $currencies->pic }}" alt="{{ $currencies->pic }}">
 </div>
 
 <div class="col-sm-12">
