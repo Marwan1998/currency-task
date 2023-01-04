@@ -8,7 +8,7 @@ use App\Repositories\BaseRepository;
 /**
  * Class CurrenciesRepository
  * @package App\Repositories
- * @version January 2, 2023, 12:25 pm UTC
+ * @version January 4, 2023, 9:05 am UTC
 */
 
 class CurrenciesRepository extends BaseRepository
@@ -20,12 +20,6 @@ class CurrenciesRepository extends BaseRepository
         'name',
         'pic'
     ];
-
-    // get all with last value.
-    public function getLatest()
-    {
-        return Currencies::with('currencies')->get();
-    }
 
     /**
      * Return searchable fields
@@ -43,5 +37,16 @@ class CurrenciesRepository extends BaseRepository
     public function model()
     {
         return Currencies::class;
+    }
+
+    // get all with last value.
+    public function getLatest()
+    {
+        return Currencies::with('currencies')->get();
+    }
+
+    public function findByName($name)
+    {
+        return Currencies::where('name', '=', $name)->with('currencies')->get();
     }
 }
