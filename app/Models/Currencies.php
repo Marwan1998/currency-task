@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 /**
  * Class Currencies
  * @package App\Models
- * @version January 2, 2023, 12:25 pm UTC
+ * @version January 4, 2023, 9:05 am UTC
  *
  * @property string $name
  * @property string $pic
@@ -22,10 +22,10 @@ class Currencies extends Model
 
     public $table = 'currencies';
     
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
 
     protected $dates = ['deleted_at'];
-
-
 
     public $fillable = [
         'name',
@@ -75,5 +75,24 @@ class Currencies extends Model
     {
         return strtoupper($name);
     }
-
+    
 }
+
+/*
+* infyom API generated code.
+
+public static $rules = [
+    'name' => 'required|string|max:7',
+    'pic' => 'required|string|max:255',
+    'created_at' => 'nullable',
+    'updated_at' => 'nullable',
+    'deleted_at' => 'nullable'
+];
+
+protected $casts = [
+    'id' => 'integer',
+    'name' => 'string',
+    'pic' => 'string'
+];
+
+*/
