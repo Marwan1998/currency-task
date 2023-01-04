@@ -48,7 +48,7 @@ class ConversionAPIController extends Controller
             return response([
                 'success' => false,
                 'message' => 'no avalible data',
-            ], 200);
+            ], 404);
         }
 
         $result = [];
