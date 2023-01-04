@@ -151,6 +151,15 @@ class CurrenciesController extends AppBaseController
         }
 
         $input = $request->all();
+        if ($request->hasFile('pic')) {
+            $image = $request->file('pic');
+            $imageName = $image->getClientOriginalName();
+            $request->file('pic')->storeAs('public/flags/', $imageName);
+            $input['pic'] = $imageName;
+        } else {
+            $input['pic'] = 'none.png';
+        }
+
         // $currencies =
         $this->currenciesRepository->update($input, $id);
         $input['currency_id'] = $id;
