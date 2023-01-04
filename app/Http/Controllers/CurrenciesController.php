@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laracasts\Flash\Flash;
 use App\Models\Currencies;
+use PhpParser\Node\Stmt\TryCatch;
 use Response;
 
 class CurrenciesController extends AppBaseController
@@ -34,15 +35,7 @@ class CurrenciesController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $currencies = $this->currenciesRepository->all(); //to-Remove
         $currencies = $this->currenciesRepository->getLatest();
-
-        // Debug
-        // return [
-        //     'WithValues' => $currencies,
-        //     // 'WithValues' => Currencies::find(1)->getValues()->where('id', '=', '2')->first(),
-        //     // 'WithValues' => Currencies::find(1)->getValues()->orderBy('created_at', 'desc')->first(),
-        // ];
 
         return view('currencies.index')->with('currencies', $currencies);
     }
@@ -77,13 +70,15 @@ class CurrenciesController extends AppBaseController
         }
         // $url = Storage::url($imageName); // if i want to save the url
 
-        $currencies = $this->currenciesRepository->create($input); // save new currency to currency table
-        
-        $input['currency_id'] = $currencies->id;
-
-        $this->currenciesInfoRepository->create($input);
-
-        Flash::success('Currencies saved successfully.');
+        //TODO: could be a DB::transaction instead.
+        try {
+            $currencies = $this->currenciesRepository->create($input); // save new currency to currency table
+            $input['currency_id'] = $currencies->id;
+            $this->currenciesInfoRepository->create($input);
+            Flash::success('A Currency saved successfully.');
+        } catch (\Throwable $th) {
+            Flash::success('Currency hasn\'t been saved.');
+        }
 
         return redirect(route('currencies.index'));
     }
@@ -105,9 +100,9 @@ class CurrenciesController extends AppBaseController
             return redirect(route('currencies.index'));
         }
         
-        $value = $this->currenciesInfoRepository->findValue($id);
+        $currencyInfo = $this->currenciesInfoRepository->findValue($id);
 
-        $currencies['value'] = $value? $value->value : 'none';
+        $currencies['value'] = $currencyInfo? $currencyInfo->value : 'none';
 
         return view('currencies.show')->with('currencies', $currencies);
     }
@@ -178,6 +173,8 @@ class CurrenciesController extends AppBaseController
     public function destroy($id)
     {
         $currencies = $this->currenciesRepository->find($id);
+
+        //TODO: when delete a currency, delete all its values from currencies_info table.
 
         if (empty($currencies)) {
             Flash::error('Currencies not found');
