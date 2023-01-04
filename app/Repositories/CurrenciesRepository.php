@@ -44,4 +44,9 @@ class CurrenciesRepository extends BaseRepository
     {
         return Currencies::with('currencies')->get();
     }
+
+    public function findByName($name)
+    {
+        return Currencies::where('name', '=', $name)->with('currencies')->get();
+    }
 }
