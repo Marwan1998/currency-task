@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Laracasts\Flash\Flash;
 use App\Models\Currencies;
-use PhpParser\Node\Stmt\TryCatch;
+use App\Models\currencies_info;
 use Response;
 
 class CurrenciesController extends AppBaseController
@@ -127,7 +127,7 @@ class CurrenciesController extends AppBaseController
 
         return view('currencies.edit')
         ->with('currencies', $currencies)
-        ->with('values', $value); //TODO:: check this useless send.
+        ->with('value', $value->value); //TODO:: check this useless send.
     }
 
     /**
