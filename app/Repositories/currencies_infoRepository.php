@@ -43,6 +43,6 @@ class currencies_infoRepository extends BaseRepository
     {
         return currencies_info::where('currency_id', $currencyID)
         ->orderBy('updated_at', 'desc')
-        ->first(['value', 'currency_id', 'updated_at']);
+        ->first(['id', 'value', 'currency_id', 'updated_at']);
     }
 }

@@ -1,3 +1,7 @@
+@php
+    $value = isset($value) ? $value : null;
+    $oldPic = isset($currencies->pic) ? $currencies->pic : 'Choose Picture';
+@endphp
 <!-- Name Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('name', 'Name:') !!}
@@ -7,7 +11,7 @@
 <!-- Price Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('values', 'Value:') !!}
-    {!! Form::number('value', null, ['class' => 'form-control', 'step' => 'any']) !!}
+    {!! Form::number('value', $value, ['class' => 'form-control', 'step' => 'any']) !!}
 </div>
 <div class="clearfix"></div>
 
@@ -17,7 +21,7 @@
     <div class="input-group">
         <div class="custom-file">
             {!! Form::file('pic', ['class' => 'custom-file-input']) !!}
-            {!! Form::label('pic', 'Choose file', ['class' => 'custom-file-label']) !!}
+            {!! Form::label('pic', $oldPic, ['class' => 'custom-file-label']) !!}
         </div>
     </div>
 </div>
