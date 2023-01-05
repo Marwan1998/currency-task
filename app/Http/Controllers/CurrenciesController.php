@@ -127,7 +127,7 @@ class CurrenciesController extends AppBaseController
 
         return view('currencies.edit')
         ->with('currencies', $currencies)
-        ->with('value', $value->value); //TODO:: check this useless send.
+        ->with('value', $value->value);
     }
 
     /**
@@ -182,8 +182,6 @@ class CurrenciesController extends AppBaseController
     {
         $currencies = $this->currenciesRepository->find($id);
 
-        //TODO: when delete a currency, delete all its values from currencies_info table.
-
         if (empty($currencies)) {
             Flash::error('Currencies not found');
 
@@ -191,7 +189,11 @@ class CurrenciesController extends AppBaseController
         }
 
         $this->currenciesRepository->delete($id);
+        
+        $idOfLastValue = $this->currenciesInfoRepository->findValue($id)->id;
 
+        currencies_info::where('currency_id', $id)->where('id', '!=', $idOfLastValue)->delete();
+        
         Flash::success('Currencies deleted successfully.');
 
         return redirect(route('currencies.index'));
