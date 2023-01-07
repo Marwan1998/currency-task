@@ -99,6 +99,8 @@ return [
 
     'templates'         => 'adminlte-templates',
 
+    'tables' => 'datatables',
+
     /*
     |--------------------------------------------------------------------------
     | Model extend class
@@ -174,7 +176,7 @@ return [
 
         'tests'         => true,
 
-        'datatables'    => false,
+        'datatables'    => true,
 
         'menu'          => [
 
