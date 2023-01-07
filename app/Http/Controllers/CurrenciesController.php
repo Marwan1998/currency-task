@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\CurrenciesDataTable;
 use App\Http\Requests\CreateCurrenciesRequest;
 use App\Http\Requests\UpdateCurrenciesRequest;
 use App\Repositories\CurrenciesRepository;
@@ -33,8 +34,10 @@ class CurrenciesController extends AppBaseController
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request, CurrenciesDataTable $currenciesDataTable)
     {
+        return $currenciesDataTable->render('currencies.index');
+
         $currencies = $this->currenciesRepository->getLatest();
 
         return view('currencies.index')->with('currencies', $currencies);

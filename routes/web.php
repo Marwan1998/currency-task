@@ -47,3 +47,6 @@ Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
 
 
 
+
+
+Route::resource('tests', App\Http\Controllers\TestController::class);
