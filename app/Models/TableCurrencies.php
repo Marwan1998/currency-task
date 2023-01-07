@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 /**
- * Class Currencies
+ * Class TableCurrencies
  * @package App\Models
- * @version January 4, 2023, 9:05 am UTC
+ * @version January 7, 2023, 10:36 am UTC
  *
  * @property string $name
  * @property string $pic
  */
-class Currencies extends Model
+class TableCurrencies extends Model
 {
     use SoftDeletes;
 
@@ -25,7 +25,10 @@ class Currencies extends Model
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
+
     protected $dates = ['deleted_at'];
+
+
 
     public $fillable = [
         'name',
@@ -38,6 +41,7 @@ class Currencies extends Model
      * @var array
      */
     protected $casts = [
+        'id' => 'integer',
         'name' => 'string',
         'pic' => 'string'
     ];
@@ -48,8 +52,11 @@ class Currencies extends Model
      * @var array
      */
     public static $rules = [
-        'name' => 'required|min:3|max:3',
-        'value' => 'required'
+        'name' => 'required|string|max:7',
+        'pic' => 'required|string|max:255',
+        'created_at' => 'nullable',
+        'updated_at' => 'nullable',
+        'deleted_at' => 'nullable'
     ];
 
     public function getValues()
@@ -64,16 +71,5 @@ class Currencies extends Model
         //will get the last inserted value.
     }
 
-    //mutator method, to save all currencies names as upper case.
-    public function setNameAttribute($name)
-    {
-        $this->attributes['name'] = strtoupper($name);
-    }
-
-    //accssor method, to retrive all currencies names as upper case.
-    public function getNameAttribute($name)
-    {
-        return strtoupper($name);
-    }
     
 }

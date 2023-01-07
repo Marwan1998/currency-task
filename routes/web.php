@@ -47,3 +47,6 @@ Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
 
 
 
+
+
+Route::resource('tableCurrencies', App\Http\Controllers\TableCurrenciesController::class);
