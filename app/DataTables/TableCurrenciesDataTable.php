@@ -24,16 +24,26 @@ class TableCurrenciesDataTable extends DataTable
         $dataTable->editColumn('pic', function ($currency) {
             return '<img class="img-fluid img-thumbnail rounded w-25" src="/storage/flags/'.$currency->pic.'" alt='.$currency->name.'>';
         })
+        ->editColumn('value', function ($currency) {
+            return $currency->currencies->value;
+        })
         ->escapeColumns([])
         ->make(true);
 
+
+        // $dataTable->addColumn('check', function ($data) {
+        //     return "<input type='checkbox' id=$data->id name=$data->name value=$data->name>";
+        // });
 
 
         // $dataTable->setRowId(function ($currency) {
         //     return $currency->id;
         // });
 
-        // $dataTable->setRowClass('alert-success');
+        // $dataTable->setRowClass(function ($user) {
+        //     return 'alert-warning';
+        // });
+        // $dataTable->setRowClass('alert-warning');
 
         return $dataTable;
     }
@@ -46,7 +56,7 @@ class TableCurrenciesDataTable extends DataTable
      */
     public function query(TableCurrencies $model)
     {
-        return $model->newQuery()->with('currencies');
+        return $model->newQuery();
     }
 
     /**
@@ -58,7 +68,6 @@ class TableCurrenciesDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
-            // ->columnDefs(['className' => 'my_class', 'targets' => '_all' ])
             ->minifiedAjax()
             ->addAction(['width' => '120px', 'printable' => false])
             ->parameters([
@@ -86,11 +95,20 @@ class TableCurrenciesDataTable extends DataTable
                 'data' => 'name',
                 'title' => 'Name',
             ],
+            // [
+            //     'name' => 'check',
+            //     'data' => 'id',
+            //     'title' => 'check',
+            //     'orderable' => false,
+            //     'searchable' => false,
+            // ],
+            // 'check',
             [
                 'name' => 'value',
-                'data' => 'currencies.value',
+                'data' => 'value',
                 'title' => 'Value',
                 'orderable' => false,
+                'searchable' => false,
             ],
             [
                 'name' => 'pic',

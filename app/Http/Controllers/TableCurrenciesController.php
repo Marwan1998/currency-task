@@ -11,15 +11,21 @@ use Flash;
 use App\Http\Controllers\AppBaseController;
 use Response;
 use App\Models\TableCurrencies;
+use App\Repositories\CurrenciesRepository;
+use App\Repositories\currencies_infoRepository;
 
 class TableCurrenciesController extends AppBaseController
 {
     /** @var TableCurrenciesRepository $tableCurrenciesRepository*/
     private $tableCurrenciesRepository;
+    private $currenciesRepository;
+    private $currenciesInfoRepository;
 
-    public function __construct(TableCurrenciesRepository $tableCurrenciesRepo)
+    public function __construct(TableCurrenciesRepository $tableCurrenciesRepo, CurrenciesRepository $currenciesRepository, currencies_infoRepository $currenciesInfoRepository)
     {
         $this->tableCurrenciesRepository = $tableCurrenciesRepo;
+        $this->currenciesRepository = $currenciesRepository;
+        $this->currenciesInfoRepository = $currenciesInfoRepository;
     }
 
     /**
@@ -31,13 +37,6 @@ class TableCurrenciesController extends AppBaseController
      */
     public function index(TableCurrenciesDataTable $tableCurrenciesDataTable)
     {
-        $model = new TableCurrencies();
-
-        // Currencies::with('currencies')->get();
-
-        // return $model->newQuery()->with('currencies')->get();
-
-
         return $tableCurrenciesDataTable->render('table_currencies.index');
     }
 
@@ -85,6 +84,10 @@ class TableCurrenciesController extends AppBaseController
 
             return redirect(route('tableCurrencies.index'));
         }
+
+        $currencyInfo = $this->currenciesInfoRepository->findValue($id);
+
+        $tableCurrencies['value'] = $currencyInfo? $currencyInfo->value : 'none';
 
         return view('table_currencies.show')->with('tableCurrencies', $tableCurrencies);
     }

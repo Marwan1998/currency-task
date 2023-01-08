@@ -39,3 +39,14 @@
 
 @endsection
 
+@push('page_scripts')
+    <script>
+        $(document).ready(function () {
+            $('table tr th').each(function() {
+                if($(this).text() == 'Pic')
+                    $(this).addClass('w-25');
+            });
+        });
+    </script>
+@endpush
+
