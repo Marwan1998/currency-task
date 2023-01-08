@@ -42,10 +42,20 @@
 @push('page_scripts')
     <script>
         $(document).ready(function () {
-            $('table tr th').each(function() {
-                if($(this).text() == 'Pic')
+
+            $('section.content table thead tr th').each(function() {
+                if($(this).text() == 'Action'){
                     $(this).addClass('w-25');
+                } else {
+                    $(this).addClass('w-25 bg-primary');
+                }
             });
+            
+            console.log($('section.content table tbody tr td'));
+            // .each(function() {
+            //     $(this).addClass('hi');
+            // });
+
         });
     </script>
 @endpush

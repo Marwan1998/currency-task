@@ -116,6 +116,12 @@ class TableCurrenciesDataTable extends DataTable
                 'title' => 'Pic',
                 'orderable' => false,
             ],
+            [
+                'name' => 'created_at',
+                'data' => 'created_at',
+                'title' => 'Created At',
+                'orderable' => false,
+            ],
         ];
     }
 
