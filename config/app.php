@@ -163,6 +163,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         \App\Providers\ViewServiceProvider::class,
 
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+
         /*
          * Package Service Providers...
          */
@@ -233,6 +236,9 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'Flash' => Laracasts\Flash\Flash::class,
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        
 
     ],
 

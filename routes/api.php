@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\CurrenciesAPIController;
 use App\Http\Controllers\API\TestController;
 use App\Http\Controllers\API\ConversionAPIController;
+use App\Http\Controllers\API\AuthAPIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,17 +18,27 @@ use App\Http\Controllers\API\ConversionAPIController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 
-Route::resource('currencies', CurrenciesAPIController::class);
-
+//public.
 // Route::resource('currency', TestController::class);
 
-Route::get('convert', [CurrenciesAPIController::class, 'index']);
+Route::post('login', [AuthAPIController::class, 'login']);
+Route::post('register', [AuthAPIController::class, 'register']);
 
-Route::get('convert/{value}/{name}', [ConversionAPIController::class, 'convertCurruncy']);
 
-Route::get('convert/{value}', [ConversionAPIController::class, 'convert']);
+
+//proteced.
+Route::group(['middleware' => 'jwt.verify'], function () {
+    
+    Route::get('logout', [AuthAPIController::class, 'logout']);
+    Route::get('get_user', [AuthAPIController::class, 'get_user']);
+    Route::get('refresh', [AuthAPIController::class, 'refresh']);
+
+    Route::resource('currencies', CurrenciesAPIController::class);
+
+    Route::get('convert', [CurrenciesAPIController::class, 'index']);
+    Route::get('convert/{value}/{name}', [ConversionAPIController::class, 'convertCurruncy']);
+    Route::get('convert/{value}', [ConversionAPIController::class, 'convert']);
+});
+
