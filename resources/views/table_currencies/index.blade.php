@@ -51,12 +51,13 @@
                 }
             });
             
-            console.log($('section.content table tbody tr td'));
-            // .each(function() {
+            // console.log($('tr.row'));
+            // $('tr.row').each(function() {
             //     $(this).addClass('hi');
             // });
 
         });
+
     </script>
 @endpush
 
