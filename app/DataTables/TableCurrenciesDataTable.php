@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\TableCurrencies;
 use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\EloquentDataTable;
+use Illuminate\Support\Carbon;
 use Barryvdh\Debugbar\Facades\Debugbar;
 
 class TableCurrenciesDataTable extends DataTable
@@ -27,8 +28,19 @@ class TableCurrenciesDataTable extends DataTable
         ->editColumn('value', function ($currency) {
             return $currency->currencies->value;
         })
+        ->editColumn('created_at', function ($currency) {
+            $newTime = Carbon::create($currency->currencies->created_at)->add(2, 'hours');
+
+            $time = $newTime->roundSecond()->format('H:i');
+            $date = $newTime->toDateString();
+            $fullStr = $newTime->format('l jS \\of F Y h:i:s A');
+
+            return $fullStr.'<br>'.$date.'<br>'.$time;
+        })
         ->escapeColumns([])
         ->make(true);
+
+
 
 
         // $dataTable->addColumn('check', function ($data) {
@@ -119,7 +131,7 @@ class TableCurrenciesDataTable extends DataTable
             [
                 'name' => 'created_at',
                 'data' => 'created_at',
-                'title' => 'Created At',
+                'title' => 'Last Update',
                 'orderable' => false,
             ],
         ];
