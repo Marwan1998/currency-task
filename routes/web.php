@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,37 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/home');
-});
+Route::get('/', fn () => redirect('/home'));
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-
-
-
-
 Route::resource('currenciesInfos', App\Http\Controllers\currencies_infoController::class);
-
-
-Route::resource('currenciesInfos', App\Http\Controllers\currencies_infoController::class);
-
-
-
-
-
-
-
 
 Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
 
 
-
-
-
-
-
-
+// Test Routes.
+Route::get('/hi', [App\Http\Controllers\TestController::class, 'index']);
