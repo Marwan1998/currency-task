@@ -7,53 +7,33 @@
 
 <li class="nav-item">
     <a href="#" class="nav-link">
-      <i class="nav-icon fas fa-chart-pie"></i>
-      <p>
-        Admin
-        <i class="right fas fa-angle-left"></i>
-      </p>
+        <i class="nav-icon fas fa-chart-pie"></i>
+        <p>
+            Admin
+            <i class="right fas fa-angle-left"></i>
+        </p>
     </a>
     <ul class="nav nav-treeview">
-      <li class="nav-item">
-        <a href="pages/charts/chartjs.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Permisstions
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="pages/charts/chartjs.html" class="nav-link">
+
+        <li class="nav-item">
+            <a href="{{ route('roles.index') }}"class="nav-link {{ Request::is('roles*') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Add Role</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/flot.html" class="nav-link">
+                <p>Roles</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="pages/charts/flot.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Edit Role</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="pages/charts/inline.html" class="nav-link">
+                <p>Users</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="pages/charts/inline.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Show Role</p>
-              </a>
-            </li>
-          </ul>
-      </li>
-      <li class="nav-item">
-        <a href="pages/charts/flot.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Users</p>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="pages/charts/inline.html" class="nav-link">
-          <i class="far fa-circle nav-icon"></i>
-          <p>Other</p>
-        </a>
-      </li>
+                <p>Other</p>
+            </a>
+        </li>
+
     </ul>
   </li>
 
@@ -61,3 +41,13 @@
 
 
 
+
+
+
+{{-- <li class="nav-item">
+    <a href="pages/charts/chartjs.html" class="nav-link">
+      <i class="far fa-circle nav-icon"></i>
+      <p>Permisstions
+      </p>
+    </a>
+</li> --}}

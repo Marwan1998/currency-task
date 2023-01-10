@@ -24,6 +24,11 @@ Route::resource('currenciesInfos', App\Http\Controllers\currencies_infoControlle
 
 Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
 
+Route::resource('roles', App\Http\Controllers\RoleController::class);
+
+
+
 
 // Test Routes.
 Route::get('/hi', [App\Http\Controllers\TestController::class, 'index']);
+
