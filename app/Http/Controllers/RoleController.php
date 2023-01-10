@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\RoleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use Flash;
 use Response;
 
@@ -42,7 +43,13 @@ class RoleController extends AppBaseController
      */
     public function create()
     {
-        return view('roles.create');
+        $permissions = Permission::all(['name', 'guard_name', 'id']);
+
+        // return [
+        //     'data' => $permissions,
+        // ];
+
+        return view('roles.create')->with('permissions', $permissions);
     }
 
     /**

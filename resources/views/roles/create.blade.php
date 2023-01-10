@@ -23,6 +23,15 @@
 
                 <div class="row">
                     @include('roles.fields')
+
+                    <!-- permissions Fields -->
+                    @foreach ($permissions as $permission)
+                        <div class="form-group col-sm-12">
+                            {!! Form::checkbox($permission->name, null) !!}
+                            {!! Form::label($permission->name, $permission->name) !!}
+                        </div>
+                    @endforeach
+
                 </div>
 
             </div>
