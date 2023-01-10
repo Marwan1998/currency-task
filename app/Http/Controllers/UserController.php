@@ -24,20 +24,30 @@ class UserController extends Controller
     {
         $input = $request->all();
 
-        $validator = validator([
-            $input['user'] => 'required',
-            $input['role'] => 'required',
+        $validator = validator()->make($input, [
+            'user_id' => 'integer | required',
+            'role_id' => 'integer | required',
         ]);
 
         if ($validator->fails()) {
-            Flash::error($validator->errors());
-            return redirect(route('usres.index'));
+            Flash::error($validator->messages());
+            return redirect(route('users.index'));
         }
+        
+        $user = User::find($input['user_id']);
+        $role = Role::find($input['role_id']);
+
+        // TODO: assign the role to the user.
+        
+
+        return [
+            'user' => $user,
+            'role' => $role,
+        ];
 
 
-        // TODO: find the user with find($id), find role with find($id), then assign the role to the user.
-
-        return $input;
+        Flash::success("role `$role->name` assigned to user `$user->name` successfully.");
+        return redirect(route('users.index'));
     }
 
 }
