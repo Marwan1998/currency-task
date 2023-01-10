@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>Create Role</h1>
+                    <h1>Assign Role</h1>
                 </div>
             </div>
         </div>
@@ -16,24 +16,21 @@
         @include('adminlte-templates::common.errors')
 
         <div class="card">
-
-            {!! Form::open(['route' => 'roles.store']) !!}
+            {!! Form::open(['route' => 'users.store']) !!}
 
             <div class="card-body">
-
                 <div class="row">
                     @include('users.fields')
                 </div>
-
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('roles.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
             </div>
 
             {!! Form::close() !!}
-
         </div>
+
     </div>
 @endsection
