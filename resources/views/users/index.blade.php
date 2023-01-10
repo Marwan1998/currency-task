@@ -16,6 +16,7 @@
         @include('adminlte-templates::common.errors')
 
         @include('flash::message')
+        @include('users.swalMesaages')
 
         <div class="card">
             {!! Form::open(['route' => 'users.store']) !!}
@@ -36,3 +37,13 @@
 
     </div>
 @endsection
+
+@push('page_scripts')
+
+    <script type="javascript" src="{{ URL::asset('js/alerts.js') }}"></script>
+    {{-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        swal("Hello world!");
+    </script> --}}
+
+@endpush
