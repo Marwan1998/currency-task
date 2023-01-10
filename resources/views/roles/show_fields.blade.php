@@ -7,7 +7,7 @@
 <!-- Guard Field -->
 <div class="col-sm-12">
     {!! Form::label('guard', 'Guard:') !!}
-    <p>{{ $role->guard }}</p>
+    <p>{{ $role->guard_name }}</p>
 </div>
 
 <!-- Created At Field -->

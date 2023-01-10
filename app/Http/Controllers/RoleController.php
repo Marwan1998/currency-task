@@ -7,9 +7,11 @@ use App\Http\Requests\UpdateRoleRequest;
 use App\Repositories\RoleRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Permission;
 use Flash;
 use Response;
+
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class RoleController extends AppBaseController
 {
@@ -45,10 +47,6 @@ class RoleController extends AppBaseController
     {
         $permissions = Permission::all(['name', 'guard_name', 'id']);
 
-        // return [
-        //     'data' => $permissions,
-        // ];
-
         return view('roles.create')->with('permissions', $permissions);
     }
 
@@ -63,7 +61,26 @@ class RoleController extends AppBaseController
     {
         $input = $request->all();
 
-        $role = $this->roleRepository->create($input);
+        $selectedPermissionsIds = [];
+        foreach ($input as $key => $value) {
+            if (str_starts_with($key, 'permission')) {
+                array_push($selectedPermissionsIds, $value);
+            }
+        }
+
+        if (count($selectedPermissionsIds) == 0) {
+            Flash::error('at least one permission should be added.');
+            return redirect(route('roles.create'));
+        }
+
+        $permissions = Permission::findMany($selectedPermissionsIds);
+        
+        $role = Role::create([
+            'name' => $input['name'],
+            'guard_name' => $input['guard']
+        ]);
+
+        $role->syncPermissions($permissions);
 
         Flash::success('Role saved successfully.');
 
@@ -107,7 +124,11 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        return view('roles.edit')->with('role', $role);
+        $permissions = Permission::all(['name', 'guard_name', 'id']);
+
+        return view('roles.edit')
+        ->with('role', $role)
+        ->with('permissions', $permissions);
     }
 
     /**
@@ -146,15 +167,18 @@ class RoleController extends AppBaseController
      */
     public function destroy($id)
     {
-        $role = $this->roleRepository->find($id);
+        $role = Role::findOrFail($id);
 
         if (empty($role)) {
             Flash::error('Role not found');
-
             return redirect(route('roles.index'));
         }
 
-        $this->roleRepository->delete($id);
+        // $role->delete();
+
+        // $this->roleRepository->delete($id);
+
+        return [$role];
 
         Flash::success('Role deleted successfully.');
 
