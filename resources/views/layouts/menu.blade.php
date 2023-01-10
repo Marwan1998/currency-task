@@ -25,19 +25,19 @@
             <li class="nav-item">
               <a href="pages/charts/chartjs.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Add Permisstion</p>
+                <p>Add Role</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="pages/charts/flot.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Edit Permisstion</p>
+                <p>Edit Role</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="pages/charts/inline.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Show All Permisstion</p>
+                <p>Show Role</p>
               </a>
             </li>
           </ul>
