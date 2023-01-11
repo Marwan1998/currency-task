@@ -194,7 +194,10 @@ class RoleController extends AppBaseController
 
         // $this->roleRepository->delete($id);
 
-        return [$role];
+        return [
+            'message' => 'Delete Role is not supported yet.',
+            // 'role' => $role,
+        ];
 
         Flash::success('Role deleted successfully.');
 

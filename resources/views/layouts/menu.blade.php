@@ -5,6 +5,7 @@
     </a>
 </li>
 
+@role(['Master', 'Admin'])
 <li class="nav-item">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
@@ -27,27 +28,17 @@
                 <p>Users</p>
             </a>
         </li>
+
+        @role('Master')
         <li class="nav-item">
-            <a href="pages/charts/inline.html" class="nav-link">
+            <a href="{{ route('other.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Other</p>
             </a>
         </li>
+        @endrole
 
     </ul>
-  </li>
+</li>
+@endrole
 
-
-
-
-
-
-
-
-{{-- <li class="nav-item">
-    <a href="pages/charts/chartjs.html" class="nav-link">
-      <i class="far fa-circle nav-icon"></i>
-      <p>Permisstions
-      </p>
-    </a>
-</li> --}}

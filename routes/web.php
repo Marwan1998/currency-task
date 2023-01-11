@@ -34,3 +34,7 @@ Route::post('users/removeRole', [App\Http\Controllers\UserController::class, 're
 // Test Routes.
 Route::get('/hi', [App\Http\Controllers\TestController::class, 'index']);
 
+
+Route::get('other', function () {
+    return view('other.index');
+})->name('other.index');
