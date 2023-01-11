@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name') }} | Password Reset</title>
+    <title>{{ config('app.name') }} | @lang('auth.reset_password.title')</title>
 
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -40,7 +40,7 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">
-                You are only one step a way from your new password, recover your password now.
+                @lang('auth.reset_password.title')
             </p>
 
             <form action="{{ route('password.update') }}" method="POST">
@@ -53,7 +53,7 @@
                            name="email"
                            value="{{ $email ?? old('email') }}"
                            class="form-control @error('email') is-invalid @enderror"
-                           placeholder="Email">
+                           placeholder="@lang('auth.email')">
                     <div class="input-group-append">
                         <div class="input-group-text"><span class="fas fa-envelope"></span></div>
                     </div>
@@ -66,7 +66,7 @@
                     <input type="password"
                            name="password"
                            class="form-control @error('password') is-invalid @enderror"
-                           placeholder="Password">
+                           placeholder="@lang('auth.password')">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -81,7 +81,7 @@
                     <input type="password"
                            name="password_confirmation"
                            class="form-control"
-                           placeholder="Confirm Password">
+                           placeholder="@lang('auth.confirm_password')">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -91,14 +91,16 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            @lang('auth.reset_password.reset_pwd_btn')
+                        </button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
             <p class="mt-3 mb-1">
-                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('login') }}">@lang('auth.sign_in')</a>
             </p>
         </div>
         <!-- /.reset-card-body -->
