@@ -5,7 +5,7 @@
     </a>
 </li>
 
-@role(['Master', 'Admin'])
+@role(['master', 'Admin'])
 <li class="nav-item">
     <a href="#" class="nav-link">
         <i class="nav-icon fas fa-chart-pie"></i>
@@ -29,7 +29,7 @@
             </a>
         </li>
 
-        @role('Master')
+        @role('master')
         <li class="nav-item">
             <a href="{{ route('other.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>

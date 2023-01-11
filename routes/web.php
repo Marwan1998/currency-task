@@ -24,17 +24,25 @@ Route::resource('currenciesInfos', App\Http\Controllers\currencies_infoControlle
 
 Route::resource('currencies', App\Http\Controllers\CurrenciesController::class);
 
-Route::resource('roles', App\Http\Controllers\RoleController::class);
-
-Route::resource('users', App\Http\Controllers\UserController::class);
-
-Route::post('users/removeRole', [App\Http\Controllers\UserController::class, 'removeRole'])->name('users.removeRole');
 
 
 // Test Routes.
 Route::get('/hi', [App\Http\Controllers\TestController::class, 'index']);
 
 
-Route::get('other', function () {
-    return view('other.index');
-})->name('other.index');
+
+Route::group(['middleware' => ['role:master']], function () {
+
+    Route::get('other', function () {
+        return view('other.index');
+    })->name('other.index');
+
+});
+
+Route::group(['middleware' => ['role:master|Admin']], function () {
+    
+    Route::resource('roles', App\Http\Controllers\RoleController::class);
+    Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::post('users/removeRole', [App\Http\Controllers\UserController::class, 'removeRole'])->name('users.removeRole');
+
+});
