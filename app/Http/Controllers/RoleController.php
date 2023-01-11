@@ -151,18 +151,11 @@ class RoleController extends AppBaseController
 
         $selectedPermissionsIds = $this->getIDsFromInput($input);
 
-        if (count($selectedPermissionsIds) == 0) {
-            Flash::error('at least one permission should be added.');
-            return redirect(route('roles.edit'));
+        if (!count($selectedPermissionsIds) == 0) {
+            $addPermissoins = Permission::findMany($selectedPermissionsIds)->pluck('name');
+            // delete all previous permissions and add the new ones in one method.
+            $role->syncPermissions($addPermissoins);
         }
-
-        // 1 - delete all previous permissions
-        // 2 - add the new ones.
-        // the previous to steps can be done using one method: syncPermissions();
-
-        $addPermissoins = Permission::findMany($selectedPermissionsIds)->pluck('name');
-
-        $role->syncPermissions($addPermissoins);
 
         $role->name = $input['name'];
         $role->guard_name = $input['guard'];
