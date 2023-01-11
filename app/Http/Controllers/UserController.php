@@ -17,8 +17,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $roles = Role::all()->pluck('name', 'id');
-        $users = User::all()->pluck('email', 'id');
+        $roles = Role::all()->where('name', '!=', 'Master')->pluck('name', 'id');
+        $users = User::all()->where('email', '!=', 'mg@45.com')->pluck('email', 'id');
 
         return view('users.index')
             ->with('users', $users)

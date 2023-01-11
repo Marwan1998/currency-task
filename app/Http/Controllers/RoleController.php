@@ -32,7 +32,7 @@ class RoleController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository->all()->where('name', '!=', 'Master');
 
         return view('roles.index')
             ->with('roles', $roles);
