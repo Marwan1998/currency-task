@@ -61,12 +61,7 @@ class RoleController extends AppBaseController
     {
         $input = $request->all();
 
-        $selectedPermissionsIds = [];
-        foreach ($input as $key => $value) {
-            if (str_starts_with($key, 'permission')) {
-                array_push($selectedPermissionsIds, $value);
-            }
-        }
+        $selectedPermissionsIds = $this->getIDsFromInput($input);
 
         if (count($selectedPermissionsIds) == 0) {
             Flash::error('at least one permission should be added.');
@@ -143,20 +138,37 @@ class RoleController extends AppBaseController
      *
      * @return Response
      */
-    public function update($id, UpdateRoleRequest $request)
+    public function update($id, Request $request)
     {
-        $role = $this->roleRepository->find($id);
+        $role = Role::find($id);
 
         if (empty($role)) {
             Flash::error('Role not found');
-
             return redirect(route('roles.index'));
         }
 
-        $role = $this->roleRepository->update($request->all(), $id);
+        $input = $request->all();
+
+        $selectedPermissionsIds = $this->getIDsFromInput($input);
+
+        if (count($selectedPermissionsIds) == 0) {
+            Flash::error('at least one permission should be added.');
+            return redirect(route('roles.edit'));
+        }
+
+        // 1 - delete all previous permissions
+        // 2 - add the new ones.
+        // the previous to steps can be done using one method: syncPermissions();
+
+        $addPermissoins = Permission::findMany($selectedPermissionsIds)->pluck('name');
+
+        $role->syncPermissions($addPermissoins);
+
+        $role->name = $input['name'];
+        $role->guard_name = $input['guard'];
+        $role->save();
 
         Flash::success('Role updated successfully.');
-
         return redirect(route('roles.index'));
     }
 
@@ -188,4 +200,18 @@ class RoleController extends AppBaseController
 
         return redirect(route('roles.index'));
     }
+
+
+    //protected methods.
+    protected function getIDsFromInput($input)
+    {
+        $ids = [];
+        foreach ($input as $key => $value) {
+            if (str_starts_with($key, 'permission')) {
+                array_push($ids, $value);
+            }
+        }
+        return $ids;
+    }
+
 }
