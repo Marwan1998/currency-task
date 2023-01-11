@@ -1,5 +1,5 @@
 console.log('Hiiii');
 
-import swal from 'sweetalert';
+// import swal from 'sweetalert';
 
-swal("Hello world!");
+// swal("Hello world!");

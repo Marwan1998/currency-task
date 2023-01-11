@@ -16,22 +16,33 @@
         @include('adminlte-templates::common.errors')
 
         @include('flash::message')
-        @include('users.swalMesaages')
+        {{-- @include('users.swalMesaages') --}}
 
         <div class="card">
             {!! Form::open(['route' => 'users.store']) !!}
-
             <div class="card-body">
                 <div class="row">
                     @include('users.fields')
                 </div>
             </div>
-
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('currencies.index') }}" class="btn btn-default">Cancel</a>
             </div>
+            {!! Form::close() !!}
+        </div>
 
+        <div class="card">
+            {!! Form::open(['route' => 'users.removeRole']) !!}
+            <div class="card-body">
+                <div class="row">
+                    @include('users.fields')
+                </div>
+            </div>
+            <div class="card-footer">
+                {!! Form::submit('Remove', ['class' => 'btn btn-danger']) !!}
+                <a href="{{ route('currencies.index') }}" class="btn btn-default">Cancel</a>
+            </div>
             {!! Form::close() !!}
         </div>
 

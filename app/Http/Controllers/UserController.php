@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
 use App\Models\Role;
 use App\Models\User;
+use PhpParser\Node\Stmt\TryCatch;
 
 class UserController extends Controller
 {
     //
+
+    private $inputValidationString = 'integer | required';
+
+
     public function index()
     {
         $roles = Role::all()->pluck('name', 'id');
@@ -25,8 +30,8 @@ class UserController extends Controller
         $input = $request->all();
 
         $validator = validator()->make($input, [
-            'user_id' => 'integer | required',
-            'role_id' => 'integer | required',
+            'user_id' => $this->inputValidationString,
+            'role_id' => $this->inputValidationString,
         ]);
 
         if ($validator->fails()) {
@@ -35,18 +40,36 @@ class UserController extends Controller
         }
         
         $user = User::find($input['user_id']);
-        $role = Role::find($input['role_id']);
 
-        // TODO: assign the role to the user.
-        
+        $result = $user->assignRole($input['role_id']); //it could be by role id or name.
 
-        return [
-            'user' => $user,
-            'role' => $role,
-        ];
+        try {
+            $assingedRoleName = $result->roles->first()->name;
+        } catch (\Throwable $th) {
+            $assingedRoleName = 'none';
+        }
 
+        Flash::success("role `$assingedRoleName` has been assigned to user `$user->name` successfully.");
+        return redirect(route('users.index'));
+    }
 
-        Flash::success("role `$role->name` assigned to user `$user->name` successfully.");
+    public function removeRole(Request $request)
+    {
+        $input = $request->all();
+        $validator = validator()->make($input, [
+            'user_id' => $this->inputValidationString,
+            'role_id' => $this->inputValidationString,
+        ]);
+
+        if ($validator->fails()) {
+            Flash::error($validator->messages());
+            return redirect(route('users.index'));
+        }
+
+        $user = User::find($input['user_id']);
+        $user->removeRole($input['role_id']); //this method accepts role id or name.
+
+        Flash::success("a role has been removed from user `$user->name` successfully.");
         return redirect(route('users.index'));
     }
 

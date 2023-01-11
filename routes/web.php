@@ -28,7 +28,7 @@ Route::resource('roles', App\Http\Controllers\RoleController::class);
 
 Route::resource('users', App\Http\Controllers\UserController::class);
 
-
+Route::post('users/removeRole', [App\Http\Controllers\UserController::class, 'removeRole'])->name('users.removeRole');
 
 
 // Test Routes.
