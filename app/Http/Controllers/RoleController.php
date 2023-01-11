@@ -104,7 +104,11 @@ class RoleController extends AppBaseController
             return redirect(route('roles.index'));
         }
 
-        return view('roles.show')->with('role', $role);
+        $rolePermissions = Role::find($id)->permissions->pluck('name');
+
+        return view('roles.show')
+        ->with('role', $role)
+        ->with('permissions', $rolePermissions);
     }
 
     /**
