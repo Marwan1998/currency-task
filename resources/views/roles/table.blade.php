@@ -2,9 +2,9 @@
     <table class="table" id="roles-table">
         <thead>
         <tr>
-            <th>Name</th>
-        <th>Guard</th>
-            <th colspan="3">Action</th>
+            <th>@lang('roles.name')</th>
+        <th>@lang('roles.guard')</th>
+            <th colspan="3">@lang('crud.action')</th>
         </tr>
         </thead>
         <tbody>
