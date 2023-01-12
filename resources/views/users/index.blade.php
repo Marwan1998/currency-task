@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-12">
-                    <h1>@lang('pages.assign')</h1>
+                    <h1>@lang('users.assign')</h1>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                {!! Form::submit("@lang('crud.remove')", ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit(__('crud.remove'), ['class' => 'btn btn-danger']) !!}
                 <a href="{{ route('currencies.index') }}" class="btn btn-default">@lang('crud.cancel')</a>
             </div>
             {!! Form::close() !!}

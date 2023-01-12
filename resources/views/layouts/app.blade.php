@@ -34,16 +34,13 @@
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
 
+          <link rel="stylesheet" href="{{asset('assets/css/customAr.css')}}">
     @stack('third_party_stylesheets')
 
     @stack('page_css')
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-
-    {{-- @if (@lang('ar'))
-        <p>hi</p>
-    @endif --}}
     
 <div class="wrapper">
     <!-- Main Header -->
@@ -159,5 +156,20 @@
 @stack('third_party_scripts')
 
 @stack('page_scripts')
+
+    <script>
+
+        $('body').css('direction', 'rtl');
+        $('aside.main-sidebar').css('right', '0');
+        $('nav ul.nav-sidebar').css('direction', 'ltr');
+
+        
+
+
+        // document.querySelector('body').style = 'direction: rtl;';
+        // document.querySelector('aside.main-sidebar').style = 'right: 0;';
+        // document.querySelector('nav ul.nav-sidebar').style = 'direction: ltr;';
+    </script>
+
 </body>
 </html>
