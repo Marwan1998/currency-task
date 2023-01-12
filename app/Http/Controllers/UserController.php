@@ -14,11 +14,15 @@ class UserController extends Controller
 
     private $inputValidationString = 'integer | required';
 
+    private $master = [
+        'role' => 'master',
+        'email' => 'mg@45.com',
+    ];
 
     public function index()
     {
-        $roles = Role::all()->where('name', '!=', 'Master')->pluck('name', 'id');
-        $users = User::all()->where('email', '!=', 'mg@45.com')->pluck('email', 'id');
+        $roles = Role::all()->where('name', '!=', $this->master['role'])->pluck('name', 'id');
+        $users = User::all()->where('email', '!=', $this->master['email'])->pluck('email', 'id');
 
         return view('users.index')
             ->with('users', $users)
