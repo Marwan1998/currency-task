@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                {!! Form::submit(__('crud.remove'), ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit('remove', ['class' => 'btn btn-danger']) !!}
                 <a href="{{ route('currencies.index') }}" class="btn btn-default">@lang('crud.cancel')</a>
             </div>
             {!! Form::close() !!}

@@ -24,9 +24,7 @@ class UserController extends Controller
         $roles = Role::all()->where('name', '!=', $this->master['role'])->pluck('name', 'id');
         $users = User::all()->where('email', '!=', $this->master['email'])->pluck('email', 'id');
 
-        return view('users.index')
-            ->with('users', $users)
-            ->with('roles', $roles);
+        return view('users.index', compact(['roles','users']));
     }
 
     public function store(Request $request)

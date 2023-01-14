@@ -34,7 +34,10 @@
           integrity="sha512-aEe/ZxePawj0+G2R+AaIxgrQuKT68I28qh+wgLrcAJOz3rxCP+TwrK5SPN+E5I+1IQjNtcfvb96HDagwrKRdBw=="
           crossorigin="anonymous"/>
 
-          <link rel="stylesheet" href="{{asset('assets/css/customAr.css')}}">
+    @if (app()->getLocale() == 'ar')
+        <link rel="stylesheet" href="{{asset('assets/css/customAr.css')}}">
+    @endif
+
     @stack('third_party_stylesheets')
 
     @stack('page_css')
@@ -82,6 +85,16 @@
                         </form>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us">
+                    </span> {{ session('lang') }}</a>
+                    {{-- app()->getLocale() --}}
+                <div class="dropdown-menu" aria-labelledby="dropdown09">
+                    <a class="dropdown-item" href="{{ url('locale/en') }}"><span class="flag-icon flag-icon-en"> </span>English</a>
+                    <a class="dropdown-item" href="{{ url('locale/ar') }}"><span class="flag-icon flag-icon-ar"> </span>Araic</a>
+                </div>
             </li>
         </ul>
     </nav>
@@ -159,16 +172,8 @@
 
     <script>
 
-        $('body').css('direction', 'rtl');
-        $('aside.main-sidebar').css('right', '0');
-        $('nav ul.nav-sidebar').css('direction', 'ltr');
-
+        // $('body').css('direction', 'rtl');
         
-
-
-        // document.querySelector('body').style = 'direction: rtl;';
-        // document.querySelector('aside.main-sidebar').style = 'right: 0;';
-        // document.querySelector('nav ul.nav-sidebar').style = 'direction: ltr;';
     </script>
 
 </body>

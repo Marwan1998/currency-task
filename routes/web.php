@@ -40,9 +40,21 @@ Route::group(['middleware' => ['role:master']], function () {
 });
 
 Route::group(['middleware' => ['role:master|Admin']], function () {
+
+    Route::get('test/setLocal', [App\Http\Controllers\TestController::class, 'setLocal'])->name('test.setLocal');
     
     Route::resource('roles', App\Http\Controllers\RoleController::class);
     Route::resource('users', App\Http\Controllers\UserController::class);
     Route::post('users/removeRole', [App\Http\Controllers\UserController::class, 'removeRole'])->name('users.removeRole');
 
 });
+
+
+Route::get('locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
+
+
+

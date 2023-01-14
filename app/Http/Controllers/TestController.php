@@ -64,4 +64,10 @@ class TestController extends Controller
         }
     }
 
+    public function setLocal()
+    {
+        \App::setlocale('en');
+        return redirect('users');
+    }
+
 }
