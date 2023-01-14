@@ -15,7 +15,7 @@
         "name": "name",
         "dbType": "string",
         "htmlType": "text",
-        "validations": "pic string image",
+        "validations": "required",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -24,10 +24,10 @@
         "inView": true
     },
     {
-        "name": "pic",
+        "name": "guard",
         "dbType": "string",
-        "htmlType": "image",
-        "validations": "",
+        "htmlType": "select,web,api",
+        "validations": "required",
         "searchable": true,
         "fillable": true,
         "primary": false,

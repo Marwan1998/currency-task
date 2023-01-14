@@ -1,0 +1,18 @@
+body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .content-wrapper, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-footer, body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header {
+    transition: margin-right.3s ease-in-out !important;
+    margin-right: 250px !important;
+    margin-left: 0px !important;
+    text-align: right !important;   
+}
+
+body{
+    direction: rtl;
+}
+
+aside.main-sidebar{
+    right: 0 ; 
+}
+
+nav ul.nav-sidebar {
+    direction: ltr;
+}
