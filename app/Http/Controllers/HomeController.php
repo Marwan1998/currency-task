@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (!session('lang')) {
+            session(['lang' => app()->getLocale()]);
+        }
         return view('home');
     }
 }
