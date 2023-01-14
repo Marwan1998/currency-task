@@ -24,6 +24,8 @@ class UserController extends Controller
         $roles = Role::all()->where('name', '!=', $this->master['role'])->pluck('name', 'id');
         $users = User::all()->where('email', '!=', $this->master['email'])->pluck('email', 'id');
 
+        // $usersWithRoles = User::with('roles')->get();
+
         return view('users.index', compact(['roles','users']));
     }
 
