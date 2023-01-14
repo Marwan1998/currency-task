@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use LaravelLegends\EloquentFilter\Concerns\HasFilter;
+
 
 /**
  * Class Currencies
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Currencies extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFilter;
 
     use HasFactory;
 

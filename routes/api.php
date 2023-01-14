@@ -31,3 +31,4 @@ Route::get('convert', [CurrenciesAPIController::class, 'index'])->name('convert.
 Route::get('convert/{value}/{name}', [ConversionAPIController::class, 'convertCurruncy'])->name('convert.convertCurruncy');
 
 Route::get('convert/{value}', [ConversionAPIController::class, 'convert'])->name('convert.convert');
+

@@ -37,15 +37,15 @@ class CurrenciesAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $currencies = $this->currenciesRepository->all(
-        //     $request->except(['skip', 'limit']),
-        //     $request->get('skip'),
-        //     $request->get('limit')
-        // );
+        // $currenciesFilter = Currencies::filter()->paginate();
+        $currenciesFilter = Currencies::with('currencies')->filter($request)->paginate();
 
-        $currencies = $this->currenciesRepository->getLatest();
+        return response($currenciesFilter, 200);
 
-        return $this->sendResponse($currencies->toArray(), 'Currencies retrieved successfully');
+
+
+        // $currencies = $this->currenciesRepository->getLatest();
+        // return $this->sendResponse($currencies->toArray(), 'Currencies retrieved successfully');
     }
 
     /**
