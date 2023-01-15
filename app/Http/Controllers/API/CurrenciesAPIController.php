@@ -10,6 +10,7 @@ use App\Repositories\currencies_infoRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use Response;
+use App\Models\User;
 
 /**
  * Class CurrenciesController
@@ -37,15 +38,21 @@ class CurrenciesAPIController extends AppBaseController
      */
     public function index(Request $request)
     {
-        // $currenciesFilter = Currencies::filter()->paginate();
         $currenciesFilter = Currencies::with('currencies')->filter($request)->paginate();
 
-        return response($currenciesFilter, 200);
+        if (!$currenciesFilter) {
+            return response()->json([
+                'success' => false,
+                'message' => 'an error occurred while trying to retrieve the currencies',
+            ], 404);
+        }
 
+        return response()->json([
+            'success' => true,
+            'data'    => $currenciesFilter,
+            'message' => 'Currencies retrieved successfully',
+        ], 200);
 
-
-        // $currencies = $this->currenciesRepository->getLatest();
-        // return $this->sendResponse($currencies->toArray(), 'Currencies retrieved successfully');
     }
 
     /**
