@@ -54,6 +54,14 @@ class Currencies extends Model
         'value' => 'required'
     ];
 
+    protected $appends = ['value'];
+
+    //
+    public function getValueAttribute()
+    {
+        return $this->attributes['value'] = $this->currencies->value;
+    }
+
     public function getValues()
     {
         // return $this->hasMany(currencies_info::class, 'currency_id', 'id');
