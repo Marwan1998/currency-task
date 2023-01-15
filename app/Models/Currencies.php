@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use LaravelLegends\EloquentFilter\Concerns\HasFilter;
+
 
 /**
  * Class Currencies
@@ -16,7 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  */
 class Currencies extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes, HasFilter;
 
     use HasFactory;
 
@@ -51,6 +53,14 @@ class Currencies extends Model
         'name' => 'required|min:3|max:3',
         'value' => 'required'
     ];
+
+    protected $appends = ['value'];
+
+    //
+    public function getValueAttribute()
+    {
+        return $this->attributes['value'] = $this->currencies->value;
+    }
 
     public function getValues()
     {

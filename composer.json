@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
         "laravelcollective/html": "^6.2",
+        "laravellegends/eloquent-filter": "^3.0",
         "spatie/laravel-permission": "^5.7"
     },
     "require-dev": {
